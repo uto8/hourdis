@@ -13,5 +13,10 @@
   <body>
     <%= render 'shared/navbar' %>
     <%= yield %>
+    <div class="float-right">
+      <div class="toastr-pos">
+        <%= toastr_flash %>
+      </div>
+    </div>
   </body>
 </html>
