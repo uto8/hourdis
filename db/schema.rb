@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_19_143302) do
+ActiveRecord::Schema.define(version: 2022_07_21_060302) do
+
+  create_table "reservations", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "reservation_number"
+    t.date "date"
+    t.time "time"
+    t.bigint "station_id", null: false
+    t.bigint "user_id", null: false
+    t.float "longitude", null: false
+    t.float "latitude", null: false
+    t.string "address", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["station_id"], name: "index_reservations_on_station_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
 
   create_table "stations", charset: "utf8mb4", force: :cascade do |t|
     t.string "station_name"
@@ -35,4 +50,6 @@ ActiveRecord::Schema.define(version: 2022_07_19_143302) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reservations", "stations"
+  add_foreign_key "reservations", "users"
 end
